@@ -32,6 +32,13 @@ const registro_cliente  = async function(req,res){
     }   
 }
 
+const login_cliente = async function(req,res){
+    var data = req.body;
+
+    res.status(200).send({data:data});
+}
+
 module.exports = {
-    registro_cliente
+    registro_cliente,
+    login_cliente
 }
