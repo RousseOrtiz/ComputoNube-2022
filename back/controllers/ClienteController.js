@@ -2,7 +2,7 @@
 
 var Cliente = require('../models/cliente');
 var bcrypt = require('bcrypt-nodejs'); //encriptar contraseña
-const { use } = require('../routes/cliente');
+var jwt = require('../helpers/jwt');
 
 const registro_cliente  = async function(req,res){
     //
@@ -46,7 +46,10 @@ const login_cliente = async function(req,res){
 
         bcrypt.compare(data.password, user.password, async function(error, check){
             if(check){
-                    res.status(200).send({data:user});
+                    res.status(200).send({
+                        data:user,
+                        token: jwt.createToken(user)
+                    });
                 }else{
                     res.status(200).send({message: 'La contraseña no coincide', data: undefined});
                 }
