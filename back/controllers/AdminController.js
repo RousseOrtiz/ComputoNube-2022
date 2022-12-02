@@ -2,6 +2,7 @@
 
 var Admin = require('../models/admin');
 var bcrypt =require('bcrypt-nodejs');
+var jwt = require('../helpers/jwt');
 
 const registro_admin  = async function(req,res){
     //
@@ -45,7 +46,11 @@ const login_admin = async function(req,res){
 
         bcrypt.compare(data.password, user.password, async function(error, check){
             if(check){
-                    res.status(200).send({data:user});
+                    res.status(200).send({
+                        data:user,
+                        token: jwt.createToken(user)
+
+                    });
                 }else{
                     res.status(200).send({message: 'La contraseña no coincide', data: undefined});
                 }
