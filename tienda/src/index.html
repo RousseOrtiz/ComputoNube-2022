@@ -5,7 +5,7 @@
   <title>Tienda</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Favicon and Touch Icons-->
+  <!-- Iconos Favicon-->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
@@ -14,13 +14,13 @@
   <meta name="msapplication-TileColor" content="#766df4">
   <meta name="theme-color" content="#ffffff">
 
-  <!-- Vendor Styles-->
+  <!-- Estilos Vendor-->
   <link rel="stylesheet" media="screen" href="assets/vendor/tiny-slider/dist/tiny-slider.css"/>
 
-  <!-- Main Theme Styles + Bootstrap-->
+  <!-- Estilos Main + Bootstrap-->
   <link rel="stylesheet" media="screen" href="assets/css/demo/ecommerce/theme.min.css">
 
-    <!-- Page loading styles-->
+    <!-- Estilos al cargar pagina-->
     <style>
       .pagination{
       margin-bottom: 0px;
@@ -101,7 +101,7 @@
       }
     </style>
 
-    <!-- Page loading scripts-->
+    <!--scripts para cargar la pagina-->
     <script>
       (function () {
         window.onload = function () {
@@ -114,7 +114,7 @@
       })();
     </script>
 
-    <!-- Demo switcher off-canvas toggle styles -->
+    <!-- Demostracion de estilos fuera canva -->
     <style>
       .cs-demo-switcher {
         position: fixed;
@@ -139,9 +139,21 @@
     </style>
 </head>
 <body>
-  <app-root></app-root>
+  <!--spinner carga de pagia-->
+  <div class="cs-page-loading active">
+    <div class="cs-page-loading-inner">
+      <div class="cs-page-spinner"></div><span>Loading...</span>
+    </div>
+  </div>
 
-  <!-- Back to top button-->
+  <!--Envuelve todo excepto el pie de página para empujar el pie de página al final de la página si hay poco contenido -->
+  <main class="cs-page-wrapper">
+    <app-root></app-root>
+  </main>
+
+  
+
+  <!-- volver al boton superior-->
   <a class="btn-scroll-top" href="#top" data-scroll data-fixed-element>
     <span class="btn-scroll-top-tooltip text-muted font-size-sm mr-2">Top</span>
     <i class="btn-scroll-top-icon cxi-angle-up"></i>
@@ -154,7 +166,7 @@
   <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
   <script src="assets/vendor/tiny-slider/dist/min/tiny-slider.js"></script>
   
-  <!-- Main theme script-->
+  <!-- tema principal main-->
   <script src="assets/js/theme.min.js"></script>
 </body>
 </html>
