@@ -16,13 +16,13 @@
         <div class="card-header">
             <form class="form-inline pt-2">
                 <label class="sr-only" for="inline-form-input-name">Apellidos</label>
-                <input class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" placeholder="John Doe">
+                  <input class="form-control mb-3 mr-sm-4" type="text" id="inline-form-input-name" placeholder="Apellidos">
                 <label class="sr-only" for="inline-form-input-username">Correo</label>
                 <div class="input-group mb-3 mr-sm-4">
                 <div class="input-group-prepend">
                     <div class="input-group-text">@</div>
                 </div>
-                <input class="form-control" type="text" id="inline-form-input-username" placeholder="Username">
+                  <input class="form-control" type="text" id="inline-form-input-username" placeholder="Correo">
                 </div>
             
                 <button class="btn btn-primary mb-3" type="submit">Buscar cliente</button>
@@ -31,71 +31,30 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered">
-                  <thead>
+                  <thead class="thead-dark">
                     <tr>
                       <th>#</th>
-                      <th>Nombre</th>
+                      <th>Nombres</th>
                       <th>Apellidos</th>
-                      <th>Puesto</th>
-                      <th>No.Teléfono</th>
+                      <th>Correo</th>
+                      <th>Opciones</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody *ngFor="let item of clientes; let indice = index">
                     <tr>
-                      <th scope="row">1</th>
-                      <td>John</td>
-                      <td>Doe</td>
-                      <td>CEO, Founder</td>
+                      <td>{{indice+1}}</td>
+                      <td>{{item.nombres}}</td>
+                      <td>{{item.apellidos}}</td>
+                      <td>{{item.email}}</td>
                       <td>
-                        <div class="btn-group dropdown">
-                            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Dropdown
-                            </button>
-                            <div class="dropdown-menu">
-                              <a href="#" class="dropdown-item">Action</a>
-                              <a href="#" class="dropdown-item">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a href="#" class="dropdown-item">Something else here</a>
-                            </div>
+                        <div class="btn-group dropdown d-inline-block mb-3 mr-2">
+                          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">OPCIONES</button>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Editar cliente</a>
+                            <a class="dropdown-item" href="#">Eliminar cliente</a>
                           </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Anna</td>
-                      <td>Cabana</td>
-                      <td>Designer</td>
-                      <td>
-                        <div class="btn-group dropdown">
-                            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Dropdown
-                            </button>
-                            <div class="dropdown-menu">
-                              <a href="#" class="dropdown-item">Action</a>
-                              <a href="#" class="dropdown-item">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a href="#" class="dropdown-item">Something else here</a>
-                            </div>
-                          </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Kale</td>
-                      <td>Thornton</td>
-                      <td>Developer</td>
-                      <td>
-                        <div class="btn-group dropdown">
-                            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Dropdown
-                            </button>
-                            <div class="dropdown-menu">
-                              <a href="#" class="dropdown-item">Action</a>
-                              <a href="#" class="dropdown-item">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a href="#" class="dropdown-item">Something else here</a>
-                            </div>
-                          </div>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
