@@ -4,9 +4,11 @@ import { ModuleWithProviders } from "@angular/core";
 import { InicioComponent } from "./components/inicio/inicio.component";
 import { LoginComponent } from "./components/login/login.component";
 
+import { AdminGuard } from "./guards/admin.guard"; //para el acceso de los admin
+
 //array con todas las rutas
 const appRoute : Routes = [
-    {path: "", component: InicioComponent},
+    {path: "", component: InicioComponent, canActivate: [AdminGuard]},
     {path: 'login', component: LoginComponent} //ruta para el componnete login
 ]
 

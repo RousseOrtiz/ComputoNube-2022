@@ -27,4 +27,10 @@ export class AdminService {
   getToken(){
     return localStorage.getItem('token');
   }
+
+  //metodo de autenticacion
+  public isAuthenticated (allowRoles : string[]):boolean{
+    return false;
+
+  }
 }
