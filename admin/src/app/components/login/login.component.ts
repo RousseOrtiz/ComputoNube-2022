@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit{
 
   public user : any = {};
   public usuario : any = {};
+  public token : any = '';
 
   constructor(
     private _adminService: AdminService,
