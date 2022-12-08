@@ -17,7 +17,7 @@ export class IndexClienteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._clienteService.listar_clientes_filtro_admin().subscribe(
+    this._clienteService.listar_clientes_filtro_admin(null,null).subscribe(
       response=>{
 
         this.clientes = response.data;
@@ -28,10 +28,32 @@ export class IndexClienteComponent implements OnInit {
       }
     );
   }
-  filtro(tipo: any){
-    console.log(tipo);
-    console.log(this.filtro_apellidos);
-    console.log(this.filtro_correo);
+
+  filtro(tipo: string | null){
+    
+    if(tipo == 'apellidos'){
+      this._clienteService.listar_clientes_filtro_admin(tipo,this.filtro_apellidos).subscribe(
+        response=>{
+  
+          this.clientes = response.data;
+  
+        },
+        error=>{
+          console.log(error);
+        }
+      );
+    }else if(tipo == 'correo'){
+      this._clienteService.listar_clientes_filtro_admin(tipo,this.filtro_correo).subscribe(
+        response=>{
+  
+          this.clientes = response.data;
+  
+        },
+        error=>{
+          console.log(error);
+        }
+      );
+    }
   }
 
 }
