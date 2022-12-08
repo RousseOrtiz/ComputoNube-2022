@@ -11,15 +11,16 @@ import { Router } from "@angular/router";//para hacer la redireccion
 export class AdminGuard implements CanActivate {
 
   constructor(
-    private _adminService:AdminService, 
+    private _adminService:AdminService,
     private _router:Router
+
   ){
 
   }
 
 
-  canActivate () : any{
-    if(!this._adminService.isAuthenticated([])){
+  canActivate():any{
+    if(!this._adminService.isAuthenticated(['admin'])){ //se psa admin para que solo tenga acceso al guard
       this._router.navigate(['/login']);
       return false;
     }
