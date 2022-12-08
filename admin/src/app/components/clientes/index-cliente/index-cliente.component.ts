@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { raceWith } from 'rxjs';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
@@ -17,6 +18,10 @@ export class IndexClienteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.init_Data();
+  }
+
+  init_Data(){
     this._clienteService.listar_clientes_filtro_admin(null,null).subscribe(
       response=>{
 
@@ -32,27 +37,35 @@ export class IndexClienteComponent implements OnInit {
   filtro(tipo: string | null){
     
     if(tipo == 'apellidos'){
-      this._clienteService.listar_clientes_filtro_admin(tipo,this.filtro_apellidos).subscribe(
-        response=>{
-  
-          this.clientes = response.data;
-  
-        },
-        error=>{
-          console.log(error);
-        }
-      );
+      if(this.filtro_apellidos){
+        this._clienteService.listar_clientes_filtro_admin(tipo,this.filtro_apellidos).subscribe(
+          response=>{
+    
+            this.clientes = response.data;
+    
+          },
+          error=>{
+            console.log(error);
+          }
+        );
+      }else{
+        this.init_Data();
+      }
     }else if(tipo == 'correo'){
-      this._clienteService.listar_clientes_filtro_admin(tipo,this.filtro_correo).subscribe(
-        response=>{
-  
-          this.clientes = response.data;
-  
-        },
-        error=>{
-          console.log(error);
-        }
-      );
+      if(this.filtro_correo){
+        this._clienteService.listar_clientes_filtro_admin(tipo,this.filtro_correo).subscribe(
+          response=>{
+    
+            this.clientes = response.data;
+    
+          },
+          error=>{
+            console.log(error);
+          }
+        );
+      }else{
+        this.init_Data();
+      }
     }
   }
 
