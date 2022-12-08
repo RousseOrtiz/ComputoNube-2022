@@ -22,9 +22,18 @@ export class LoginComponent implements OnInit{
     private _adminService: AdminService,
     private _router: Router
   ) {
+    this.token = this._adminService.getToken();
 
   }
   ngOnInit(): void{
+
+    console.log(this.token);
+    if(this.token){
+      this._router.navigate(['/']);
+    }else{
+      //se mantiene en el componente
+    }
+    
   }
 
   login(loginForm: { valid: any; }){
