@@ -1,9 +1,26 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { GLOBAL } from "./GLOBAL"; //para la comunicacion con el back
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor() { }
+  public url;
+
+  constructor(
+    private _http: HttpClient,
+  ){
+  
+    this.url = GLOBAL.url;
+  }
+// se pasa data para recibir la contraseña y correo
+  login_admin(data: any):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.post(this.url+'login_admin',data,{headers:headers});
+
+  }
 }
