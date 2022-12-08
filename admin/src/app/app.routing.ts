@@ -5,10 +5,16 @@ import { InicioComponent } from "./components/inicio/inicio.component";
 import { LoginComponent } from "./components/login/login.component";
 
 import { AdminGuard } from "./guards/admin.guard"; //para el acceso de los admin
+import { IndexClienteComponent } from "./components/clientes/index-cliente/index-cliente.component";
 
 //array con todas las rutas
 const appRoute : Routes = [
     {path: "", component: InicioComponent, canActivate: [AdminGuard]},
+
+    {path: 'panel',children:[
+        {path: 'clientes', component: IndexClienteComponent, canActivate: [AdminGuard]}
+    ]},
+
     {path: 'login', component: LoginComponent} //ruta para el componnete login
 ]
 
