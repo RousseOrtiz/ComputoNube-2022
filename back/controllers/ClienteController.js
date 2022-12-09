@@ -87,9 +87,30 @@ const listar_clientes_filtro_admin =async function(req,res){
         res.status(500).send({message: 'NoAccess'});
     }
 }
+//nfuncion para el registro de cliente desde admin
+const registro_cliente_admin = async(req,res)=>{
+    if(req.user){
+        if(req.user.role == 'admin'){
+            var data = req.body;
+
+            bcrypt.hash('123456789',null,null,async function(err,hash){
+                if(hash){
+                    data.password = hash;
+                    let reg = await Cliente.create(data);
+                    res.status(200).send({data:reg});
+                }else{
+                    res.status(200).send({message:'Error en el servidor',data:undefined});
+                }
+            })
+        }
+    }
+
+}
+
 
 module.exports = {
     registro_cliente,
     login_cliente,
-    listar_clientes_filtro_admin
+    listar_clientes_filtro_admin,
+    registro_cliente_admin
 }

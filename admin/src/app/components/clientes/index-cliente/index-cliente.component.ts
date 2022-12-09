@@ -16,7 +16,7 @@ export class IndexClienteComponent implements OnInit {
   public token: any;
 
   public page = 1;
-  public pageSize = 1;
+  public pageSize = 10;
 
   constructor(
     private _clienteService : ClienteService,
