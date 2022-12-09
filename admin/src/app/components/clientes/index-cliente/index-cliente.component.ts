@@ -21,6 +21,7 @@ export class IndexClienteComponent implements OnInit {
 
   public page = 1;
   public pageSize = 10;
+  public load_data = true;
 
   constructor(
     private _clienteService : ClienteService,
@@ -39,6 +40,7 @@ export class IndexClienteComponent implements OnInit {
       response=>{
 
         this.clientes = response.data;
+        this.load_data = false;
 
       },
       error=>{
@@ -51,11 +53,13 @@ export class IndexClienteComponent implements OnInit {
     
     if(tipo == 'apellidos'){
       if(this.filtro_apellidos){
+        this.load_data = true;
         this._clienteService.listar_clientes_filtro_admin(tipo,this.filtro_apellidos,this.token).subscribe(
           response=>{
     
             this.clientes = response.data;
-    
+            this.load_data = false;
+            
           },
           error=>{
             console.log(error);
@@ -66,10 +70,12 @@ export class IndexClienteComponent implements OnInit {
       }
     }else if(tipo == 'correo'){
       if(this.filtro_correo){
+        this.load_data = true;
         this._clienteService.listar_clientes_filtro_admin(tipo,this.filtro_correo,this.token).subscribe(
           response=>{
     
             this.clientes = response.data;
+            this.load_data = false;
     
           },
           error=>{

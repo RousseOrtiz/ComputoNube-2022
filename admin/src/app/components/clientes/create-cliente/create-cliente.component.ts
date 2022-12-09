@@ -14,6 +14,7 @@ export class CreateClienteComponent implements OnInit{
     genero: '' //inicializacion de genero
   };
   public token:any;
+  public load_btn = false;
 
   constructor(
     private _clienteService:ClienteService,
@@ -29,6 +30,7 @@ export class CreateClienteComponent implements OnInit{
   registro(registroForm: any){
       if(registroForm.valid){
         console.log(this.cliente);
+        this.load_btn = true;
         this._clienteService.registro_cliente_admin(this.cliente,this.token).subscribe(
           response=>{
             console.log(response);
@@ -51,6 +53,7 @@ export class CreateClienteComponent implements OnInit{
               email: ''
              }
 
+             this.load_btn = false;
              this._router.navigate(['/panel/clientes']);
           },
           error=>{
