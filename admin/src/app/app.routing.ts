@@ -7,6 +7,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { AdminGuard } from "./guards/admin.guard"; //para el acceso de los admin
 import { IndexClienteComponent } from "./components/clientes/index-cliente/index-cliente.component";
 import { CreateClienteComponent } from "./components/clientes/create-cliente/create-cliente.component";
+import { EditClienteComponent } from "./components/clientes/edit-cliente/edit-cliente.component";
 
 //array con todas las rutas
 const appRoute : Routes = [
@@ -15,7 +16,8 @@ const appRoute : Routes = [
 
     {path: 'panel', children:[
         {path: 'clientes', component: IndexClienteComponent, canActivate: [AdminGuard]},
-        {path: 'clientes/registro', component: CreateClienteComponent, canActivate: [AdminGuard]}
+        {path: 'clientes/registro', component: CreateClienteComponent, canActivate: [AdminGuard]},
+        {path: 'clientes/:id', component: EditClienteComponent, canActivate: [AdminGuard]}
     ]},
 
     {path: 'login', component: LoginComponent}
