@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-edit-cliente',
@@ -7,19 +9,37 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-cliente.component.css']
 })
 export class EditClienteComponent implements OnInit{
-  [x: string]: any;
 
   public cliente:any = {};
+  public id: any;
+  public token: any;
 
   constructor(
-    private _route : ActivatedRoute
-  ){}
+    private _route : ActivatedRoute,
+    private _clienteService : ClienteService,
+    private _adminService : AdminService
+  ){
+    this.token = this._adminService.getToken();
+  }
 
   ngOnInit(): void {
     this._route.params.subscribe(
       params=>{
         this['id'] = params['id'];
-        console.log(this['id'])
+
+        this._clienteService.obtener_cliente_admin(this.id,this.token).subscribe(
+          response=>{
+            console.log(response);
+            if(response.data == undefined){
+              this.cliente = undefined;
+            }else{
+              this.cliente = response.data;
+            }
+          },
+          error=>{
+            
+          }
+        );
       }
     )
   }
