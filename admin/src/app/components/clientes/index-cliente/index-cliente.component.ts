@@ -3,6 +3,10 @@ import { raceWith } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 
+declare var jQuer:any;
+declare var $:any;
+declare var iziToast:any;
+
 @Component({
   selector: 'app-index-cliente',
   templateUrl: './index-cliente.component.html',
@@ -76,6 +80,30 @@ export class IndexClienteComponent implements OnInit {
         this.init_Data();
       }
     }
+  }
+
+  //metodo para eliminar cliente
+  eliminar(id: any){
+    this._clienteService.eliminar_cliente_admin(id,this.token).subscribe(
+      response=>{
+        iziToast.show({
+            title : 'SUCCESS',
+            titleColor : '#1DC74C',
+            color: 'green',
+            class : 'text-success',
+            position : 'topRight',
+            message : 'Cliente eliminado exitosamente.' 
+       });
+       $('#delete-'+id).modal('hide'); //para cerrar el modal 
+       $('.modal-backdrop').removeClass('show');
+       //mostrar tabla actualizada
+       this.init_Data();
+      
+      },
+      error=>{
+        console.log(error);
+      }
+    )
   }
 
 }
