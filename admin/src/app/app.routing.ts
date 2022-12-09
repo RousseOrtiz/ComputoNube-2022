@@ -9,7 +9,7 @@ import { IndexClienteComponent } from "./components/clientes/index-cliente/index
 
 //array con todas las rutas
 const appRoute : Routes = [
-    {path: '', component: InicioComponent, canActivate: [AdminGuard]},
+    {path: 'inicio', component: InicioComponent, canActivate: [AdminGuard]},
 
     {path: 'panel', children:[
         {path: 'clientes', component: IndexClienteComponent, canActivate: [AdminGuard]}
