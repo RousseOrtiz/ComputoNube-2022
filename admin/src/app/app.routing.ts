@@ -9,6 +9,7 @@ import { IndexClienteComponent } from "./components/clientes/index-cliente/index
 
 //array con todas las rutas
 const appRoute : Routes = [
+    {path: '', redirectTo: 'inicio', pathMatch: 'full'},
     {path: 'inicio', component: InicioComponent, canActivate: [AdminGuard]},
 
     {path: 'panel', children:[
