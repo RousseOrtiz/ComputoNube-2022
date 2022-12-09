@@ -131,11 +131,38 @@ const obtener_cliente_admin =async function(req,res){
     }
 }
 
+const actualizar_cliente_admin = async function(req,res){
+    if(req.user){
+        if(req.user.role == 'admin'){
+
+            var id = req.params['id'];
+            var data = req.body;
+
+            var reg = await Cliente.findByIdAndUpdate({_id:id},{
+                nombres : data.nombres,
+                apellidos : data.apellidos,
+                email: data.email,
+                telefono : data.telefono,
+                f_nacimiento: data.f_nacimiento,
+                dni: data.dni,
+                genero : data.genero
+            })
+            res.status(200).send({data:reg});
+        
+        }else{
+            res.status(500).send({message: 'NoAccess'});
+        }      
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
 
 module.exports = {
     registro_cliente,
     login_cliente,
     listar_clientes_filtro_admin,
     registro_cliente_admin,
-    obtener_cliente_admin
+    obtener_cliente_admin,
+    actualizar_cliente_admin
 }

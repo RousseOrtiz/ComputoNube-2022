@@ -31,4 +31,10 @@ export class ClienteService {
     return this._http.get(this.url+'obtener_cliente_admin/'+id,{headers:headers});
 
   }
+
+  actualizar_cliente_admin(id: any,data:string ,token: string):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.put(this.url+'actualizar_cliente_admin/'+id,data,{headers:headers});
+  }
+
 }

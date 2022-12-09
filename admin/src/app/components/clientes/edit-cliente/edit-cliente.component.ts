@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 
+declare var iziToast:any;
+
 @Component({
   selector: 'app-edit-cliente',
   templateUrl: './edit-cliente.component.html',
@@ -45,7 +47,24 @@ export class EditClienteComponent implements OnInit{
   }
 
   actualizar(updateForm: any){
-
+    if(updateForm.valid){
+      this._clienteService.actualizar_cliente_admin(this.id,this.cliente,this.token).subscribe(
+        response=>{
+          console.log(response);
+        }, error=>{
+          console.log(error);
+        }
+      );
+    }else{
+      iziToast.show({
+        title : 'ERROR',
+        titleColor : '#FF0000',
+        color: 'red',
+        class : 'text-danger',
+        position : 'topRight',
+        message : 'Los datos del formulario no son validos' 
+       });
+    }
   }
 
 }
