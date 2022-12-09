@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 
@@ -19,7 +19,8 @@ export class EditClienteComponent implements OnInit{
   constructor(
     private _route : ActivatedRoute,
     private _clienteService : ClienteService,
-    private _adminService : AdminService
+    private _adminService : AdminService,
+    private _router : Router
   ){
     this.token = this._adminService.getToken();
   }
@@ -50,7 +51,15 @@ export class EditClienteComponent implements OnInit{
     if(updateForm.valid){
       this._clienteService.actualizar_cliente_admin(this.id,this.cliente,this.token).subscribe(
         response=>{
-          console.log(response);
+          iziToast.show({
+            title : 'SUCCESS',
+            titleColor : '#1DC74C',
+            color: 'green',
+            class : 'text-success',
+            position : 'topRight',
+            message : 'Cliente actualiazado exitosamente.' 
+         });
+         this._router.navigate(['/panel/clientes']);
         }, error=>{
           console.log(error);
         }
