@@ -3,7 +3,7 @@ import { raceWith } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 
-declare var jQuer:any;
+declare var jQuery:any;
 declare var $:any;
 declare var iziToast:any;
 

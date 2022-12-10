@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from '../../login/login.component';
 
 declare var iziToast:any;
-declare var jQuer:any;
+declare var jQuery:any;
 declare var $:any;
 
 @Component({
@@ -12,11 +12,18 @@ declare var $:any;
 })
 export class CreateProductoComponent implements OnInit{
 
-  public producto : any = {};
+  public producto : any = {
+    categoria: ''
+  };
   public file:any;
   public imgSelect : any | ArrayBuffer ='assets/img/01.jpg';
+  public config : any = {};
 
-  constructor(){}
+  constructor(){
+    this.config = {
+      height: 500
+    }
+  }
 
   ngOnInit(): void {
     
@@ -24,6 +31,8 @@ export class CreateProductoComponent implements OnInit{
 
   registro(registroForm: any){
     if(registroForm.valid){
+      console.log(this.producto);
+      console.log(this.file);
 
     }else{
       iziToast.show({

@@ -3,7 +3,7 @@ import { Route, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 
 
-declare var jQuer:any;
+declare var jQuery:any;
 declare var $:any;
 declare var iziToast:any;
 

@@ -17,7 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-simple": "^0.5.6",
     "moment": "^2.29.4",
-    "mongoose": "^6.7.5"
+    "moongose": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

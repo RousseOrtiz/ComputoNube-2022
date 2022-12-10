@@ -4,6 +4,7 @@ var Cliente = require('../models/cliente');
 var bcrypt = require('bcrypt-nodejs'); //encriptar contraseña
 var jwt = require('../helpers/jwt');
 
+//funciones
 const registro_cliente  = async function(req,res){
     //
     var data = req.body;
