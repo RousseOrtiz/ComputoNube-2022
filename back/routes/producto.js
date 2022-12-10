@@ -5,7 +5,11 @@ var productoController = require('../controllers/productoController');
 
 var api = express.Router();
 var auth = require('../middlewares/authenticate');
+var multiparty = require('connect-multiparty');
+var path = multiparty({uploadDir:'./uploads/productos'});
 //rutas de accesos
+
+api.post('/registro_producto_admin', [auth.auth,path], productoController.registro_producto_admin);
 
 
 module.exports = api;

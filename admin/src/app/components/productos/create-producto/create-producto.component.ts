@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/services/admin.service';
+import { ProductoService } from 'src/app/services/producto.service';
 import { LoginComponent } from '../../login/login.component';
 
 declare var iziToast:any;
@@ -18,11 +20,16 @@ export class CreateProductoComponent implements OnInit{
   public file:any;
   public imgSelect : any | ArrayBuffer ='assets/img/01.jpg';
   public config : any = {};
+  public token;
 
-  constructor(){
+  constructor(
+    private _productService : ProductoService,
+    private _adminService : AdminService
+  ){
     this.config = {
       height: 500
     }
+    this.token = this._adminService.getToken();
   }
 
   ngOnInit(): void {
@@ -33,6 +40,15 @@ export class CreateProductoComponent implements OnInit{
     if(registroForm.valid){
       console.log(this.producto);
       console.log(this.file);
+
+      this._productService.registro_producto_admin(this.producto,this.file,this.token).subscribe(
+        response=>{
+          console.log(response);
+        },
+        error=>{
+          console.log(error);
+        }
+      );
 
     }else{
       iziToast.show({
