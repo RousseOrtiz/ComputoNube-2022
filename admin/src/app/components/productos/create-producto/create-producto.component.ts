@@ -23,7 +23,7 @@ export class CreateProductoComponent implements OnInit{
   public token;
 
   constructor(
-    private _productService : ProductoService,
+    private _productoService : ProductoService,
     private _adminService : AdminService
   ){
     this.config = {
@@ -41,7 +41,7 @@ export class CreateProductoComponent implements OnInit{
       console.log(this.producto);
       console.log(this.file);
 
-      this._productService.registro_producto_admin(this.producto,this.file,this.token).subscribe(
+      this._productoService.registro_producto_admin(this.producto,this.file,this.token).subscribe(
         response=>{
           console.log(response);
         },
@@ -49,7 +49,6 @@ export class CreateProductoComponent implements OnInit{
           console.log(error);
         }
       );
-
     }else{
       iziToast.show({
           title : 'ERROR',
@@ -58,7 +57,10 @@ export class CreateProductoComponent implements OnInit{
           class : 'text-danger',
           position : 'topRight',
           message : 'Los datos del formulario no son validos' 
-        });
+      });
+      $('#input-portada').text('Seleccionar imagen');
+        this.imgSelect = 'assets/img/01.jpg';   //volver a cargar la imagen por defecto
+        this.file = undefined;
     }
   }
 //obtencion de imagen
