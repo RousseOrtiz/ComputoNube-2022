@@ -28,7 +28,7 @@ import { IndexProductoComponent } from './components/productos/index-producto/in
     CreateClienteComponent,
     EditClienteComponent,
     CreateProductoComponent,
-    IndexProductoComponent
+    IndexProductoComponent,
   ],
   imports: [
     BrowserModule,

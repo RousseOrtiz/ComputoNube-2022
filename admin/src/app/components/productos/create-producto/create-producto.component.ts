@@ -45,13 +45,12 @@ export class CreateProductoComponent implements OnInit{
       if(this.file == undefined){
         iziToast.show({
           title : 'ERROR',
-            titleColor : '#FF0000',
-            color: 'red',
-            class : 'text-danger',
-            position : 'topRight',
-            message : 'Debe subir una imagen para registrar' 
+          titleColor : '#FF0000',
+          color: 'red',
+          class : 'text-danger',
+          position : 'topRight',
+          message : 'Debe subir una imagen para registrar producto' 
       });
-
       }else{
         console.log(this.producto);
         console.log(this.file);
@@ -78,6 +77,7 @@ export class CreateProductoComponent implements OnInit{
           }
         );
       }
+
     }else{
       iziToast.show({
           title : 'ERROR',
