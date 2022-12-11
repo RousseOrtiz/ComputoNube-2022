@@ -60,4 +60,9 @@ export class ProductoService {
       return this._http.put(this.url+'actualizar_producto_admin/'+id,data,{headers:headers});
     }
   }
+
+  eliminar_producto_admin(id: any,token: string):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.delete(this.url+'eliminar_producto_admin/'+id,{headers:headers});
+  }
 }
