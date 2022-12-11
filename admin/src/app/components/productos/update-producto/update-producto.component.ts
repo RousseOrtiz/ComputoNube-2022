@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { subscribeOn } from 'rxjs';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -26,7 +26,9 @@ export class UpdateProductoComponent implements OnInit{
 
   constructor(
     private _route : ActivatedRoute,
-    private _productoService : ProductoService
+    private _productoService : ProductoService,
+    private _router : Router,
+
   ){
     this.config = {
       height: 500
@@ -74,12 +76,24 @@ export class UpdateProductoComponent implements OnInit{
         data.descripcion = this.producto.descripcion;
         data.contenido = this.producto.contenido;
 
+        this.load_btn = true;
         this._productoService.actualizar_producto_admin(data,this.id,this.token).subscribe(
           response=>{
             console.log(response);
+            iziToast.show({
+                title : 'SUCCESS',
+                titleColor : '#1DC74C',
+                color: 'green',
+                class : 'text-success',
+                position : 'topRight',
+                message : 'Producto actualizado exitosamente.' 
+          });
+          this.load_btn = false;
+          this._router.navigate(['/panel/productos']);
           },
           error=>{
             console.log(error);
+            this.load_btn = false;
           }
         )
       }else{
@@ -91,6 +105,7 @@ export class UpdateProductoComponent implements OnInit{
           position : 'topRight',
           message : 'Los datos del formulario no son validos' 
       });
+      this.load_btn = false;
       }
   }
 
