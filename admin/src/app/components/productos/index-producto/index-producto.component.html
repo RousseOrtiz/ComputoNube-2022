@@ -49,7 +49,7 @@
                     </tr>
                 </tbody>
                 <ng-container *ngIf="!load_data">
-                    <tbody *ngFor="let item of productos">
+                    <tbody *ngFor="let item of productos | slice: (page-1)*pageSize : (page-1)* pageSize + pageSize">
                         <tr>
                             <td>
                                 <h6 style="padding-bottom: 0; margin-bottom: 0;">
@@ -78,11 +78,11 @@
         </div>
     </div>
     <div class="card-footer">
-            <!--<ngb-pagination
+            <ngb-pagination
               [(page)] = "page"
               [pageSize]="pageSize"
-              [collectionSize]="clientes.length"
-            ></ngb-pagination> -->
+              [collectionSize]="productos.length"
+            ></ngb-pagination>
     </div>
 </div>
 

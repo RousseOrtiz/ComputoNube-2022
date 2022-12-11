@@ -16,6 +16,8 @@ export class IndexProductoComponent implements OnInit{
   public token: any;
   public productos : Array<any> = [];
   public url: any;
+  public page = 1;
+  public pageSize = 10;
 
   constructor(
     private _productoService : ProductoService
