@@ -105,6 +105,13 @@ const actualizar_producto_admin = async function(req,res){
                     contenido: data.contenido,
                     portada: portada_name
                 });
+                fs.stat('./uploads/productos/'+reg.portada, function(err){
+                    if(!err){
+                        fs.unlink('./uploads/productos/'+reg.portada, (err)=>{
+                            if(err) throw err;
+                        });
+                    }
+                })
                 res.status(200).send({data:reg});
 
             }else{
@@ -117,6 +124,9 @@ const actualizar_producto_admin = async function(req,res){
                     descripcion: data.descripcion,
                     contenido: data.contenido,
                 });
+
+
+
                 res.status(200).send({data:reg});
             }
             
