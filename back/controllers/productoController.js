@@ -61,9 +61,77 @@ const obtener_portada = async  function(req,res){
     })
 }
 
+const obtener_producto_admin =async function(req,res){
+    if(req.user){
+        if(req.user.role == 'admin'){
+
+            var id = req.params['id'];
+
+            try {
+                var reg = await Producto.findById({_id:id});
+                res.status(200).send({data:reg})
+            }catch (error){
+                res.status(200).send({data:undefined})
+            }
+        
+        }else{
+            res.status(500).send({message: 'NoAccess'});
+        }      
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
+const actualizar_producto_admin = async function(req,res){
+    if(req.user){
+        if(req.user.role == 'admin'){
+            let id  = req.params['id'];
+            let data = req.body;
+            //console.log(data);
+            //console.log(req.files);
+
+            if(req.files){
+                //si hay imagen
+                var img_path = req.files.portada.path;
+                var name = img_path.split('\\');
+                var portada_name = name[2];
+
+                let reg = await Producto.findByIdAndUpdate({_id:id},{
+                    titulo : data.titulo,
+                    stock: data.stock,
+                    precio: data.precio,
+                    categoria: data.categoria,
+                    descripcion: data.descripcion,
+                    contenido: data.contenido,
+                    portada: portada_name
+                });
+                res.status(200).send({data:reg});
+
+            }else{
+                //si no hay imagen 
+                let reg = await Producto.findByIdAndUpdate({_id:id},{
+                    titulo : data.titulo,
+                    stock: data.stock,
+                    precio: data.precio,
+                    categoria: data.categoria,
+                    descripcion: data.descripcion,
+                    contenido: data.contenido,
+                });
+                res.status(200).send({data:reg});
+            }
+            
+        }else{
+            res.status(500).send({message: 'NoAccess'});
+        }
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
 
 module.exports = {
     registro_producto_admin,
     listar_productos_admin,
-    obtener_portada
+    obtener_portada,
+    obtener_producto_admin,
+    actualizar_producto_admin
 }
