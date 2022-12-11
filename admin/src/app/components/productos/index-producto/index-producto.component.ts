@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { ProductoService } from 'src/app/services/producto.service';
 
+declare var iziToast: any;
+
 @Component({
   selector: 'app-index-producto',
   templateUrl: './index-producto.component.html',
@@ -23,6 +25,10 @@ export class IndexProductoComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.init_data();
+  }
+
+  init_data(){
     this._productoService.listar_productos_admin(this.filtro,this.token).subscribe(
       response=>{
         console.log(response);
@@ -35,4 +41,35 @@ export class IndexProductoComponent implements OnInit{
       }
     )
   }
+
+  filtrar(){
+    if(this.filtro){
+      this._productoService.listar_productos_admin(this.filtro,this.token).subscribe(
+        response=>{
+          console.log(response);
+          this.productos = response.data;
+          this.load_data = false;
+        },
+        error=>{
+          console.log(error);
+          
+        }
+      )
+    }else{
+      iziToast.show({
+          title : 'ERROR',
+          titleColor : '#FF0000',
+          color: 'red',
+          class : 'text-danger',
+          position : 'topRight',
+          message : 'Ingrese un filtro para buscar productos' 
+      });
+    }
+  }
+
+  resetear(){
+    this.filtro = '';
+    this.init_data();
+  }
+
 }

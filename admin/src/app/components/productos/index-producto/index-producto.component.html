@@ -18,8 +18,9 @@
         <div class="col-6">
             <!-- Button addon on the right -->
             <div class="input-group">
-                 <input class="form-control" type="text" placeholder="Titulo del producto">
-                 <button class="btn btn-primary" type="button">Filtrar</button>
+                 <input class="form-control " type="text" placeholder="Titulo del producto" name="filtro" [(ngModel)]="filtro">
+                 <button class="btn btn-dark" type="button" (click)="filtrar()">Filtrar</button>
+                 <button class="btn btn-secondary" type="button" (click)="resetear()">Resetear</button>
             </div>
         </div>
     </div>
