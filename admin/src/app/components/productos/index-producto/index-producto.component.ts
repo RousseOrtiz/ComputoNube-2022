@@ -74,4 +74,8 @@ export class IndexProductoComponent implements OnInit{
     this.init_data();
   }
 
+  eliminar(id: any){
+    
+  }
+
 }
