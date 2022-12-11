@@ -50,7 +50,13 @@
                 <ng-container *ngIf="!load_data">
                     <tbody *ngFor="let item of productos">
                         <tr>
-                            <td>{{item.titulo}}</td>
+                            <td>
+                                <h6 style="padding-bottom: 0; margin-bottom: 0;">
+                                    <!-- Circle thumbnail -->
+                                    <img style="width: 80px;" [src]="url +'obtener_portada/'+item.portada" class="img-thumbnail rounded-circle" alt="Circle image">
+                                    <td>{{item.titulo}}</td>
+                                </h6>
+                            </td>
                             <td>{{item.stock}}</td>
                             <td>{{item.precio}}</td>
                             <td>{{item.categoria}}</td>
