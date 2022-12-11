@@ -27,6 +27,24 @@ const registro_producto_admin = async function(req,res){
     }
 }
 
+const listar_productos_admin = async function(req,res){
+    if(req.user){
+        if(req.user.role == 'admin'){
+            
+            var filtro = req.params['filtro'];
+
+            let reg = await Producto.find({titulo: new RegExp(filtro, 'i')});
+            res.status(200).send({data: reg});
+
+        }else{
+            res.status(500).send({message: 'NoAccess'});
+        }
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
 module.exports = {
-    registro_producto_admin
+    registro_producto_admin,
+    listar_productos_admin
 }

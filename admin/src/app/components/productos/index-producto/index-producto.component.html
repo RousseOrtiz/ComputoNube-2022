@@ -29,8 +29,7 @@
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th>#</th>
-                        <th>Titulo</th>
+                        <th>Título</th>
                         <th>Stock</th>
                         <th>Precio</th>
                         <th>Categoria</th>
@@ -49,7 +48,24 @@
                     </tr>
                 </tbody>
                 <ng-container *ngIf="!load_data">
-                    
+                    <tbody *ngFor="let item of productos">
+                        <tr>
+                            <td>{{item.titulo}}</td>
+                            <td>{{item.stock}}</td>
+                            <td>{{item.precio}}</td>
+                            <td>{{item.categoria}}</td>
+                            <td>{{item.nventas}}</td>
+                            <td>
+                                <div class="btn-group dropdown d-inline-block mb-3 mr-2">
+                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">OPCIONES</button>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item">Editar cliente</a>
+                                    </div>
+                                  </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </ng-container>
             </table>
         </div>

@@ -10,6 +10,6 @@ var path = multiparty({uploadDir:'./uploads/productos'});
 //rutas de accesos
 
 api.post('/registro_producto_admin', [auth.auth,path], productoController.registro_producto_admin);
-
+api.get('/listar_productos_admin/:filtro?',auth.auth,productoController.listar_productos_admin);
 
 module.exports = api;
