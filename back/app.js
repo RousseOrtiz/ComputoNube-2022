@@ -9,6 +9,7 @@ var port = process.env.PORT || 4201;
 var cliente_route = require('./routes/cliente');
 var admin_route = require('./routes/admin');
 var producto_route = require('./routes/producto');
+var cupon_routes = require('./routes/cupon');
 
 mongoose .connect('mongodb+srv://usr1:usr1@cluster0.ckidho3.mongodb.net/Tienda',{useUnifiedTopology: true, useNewUrlParser: true}, (err, res)=>{
     if(err){
@@ -35,5 +36,6 @@ app.use((req,res,next)=>{
 app.use('/api',cliente_route);
 app.use('/api',admin_route);
 app.use('/api',producto_route);
+app.use('/api',cupon_routes);
 
 module.exports = app;
