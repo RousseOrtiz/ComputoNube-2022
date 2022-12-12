@@ -100,10 +100,10 @@ export class IndexProductoComponent implements OnInit{
       },
       error=>{
         iziToast.show({
-            title : 'SUCCESS',
+            title : 'ERROR',
             titleColor : '#1DC74C',
-            color: 'green',
-            class : 'text-success',
+            color: 'red',
+            class : 'text-danger',
             position : 'topRight',
             message : 'Error en el servidor' 
        });
