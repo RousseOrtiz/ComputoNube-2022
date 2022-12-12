@@ -1,5 +1,5 @@
 import { Component , OnInit} from '@angular/core';
-import { Router } from 'express';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CuponService } from 'src/app/services/cupon.service';
 declare var iziToast:any;
 
@@ -18,7 +18,7 @@ export class CreateCuponComponent implements OnInit{
 
   constructor(
     private _cuponService : CuponService,
-    private _router:Router
+    private _router: Router
   ){
     this.token = localStorage.getItem('token');
   }
@@ -29,7 +29,7 @@ export class CreateCuponComponent implements OnInit{
 
   registro(registroForm: any){
     if(registroForm.valid){
-
+      this.load_btn = true;
       this._cuponService.registro_cupon_admin(this.cupon,this.token).subscribe(
         response=>{
           iziToast.show({
@@ -40,21 +40,24 @@ export class CreateCuponComponent implements OnInit{
               position : 'topRight',
               message : 'Nuevo cupon registrado exitosamente.' 
          });
+         this.load_btn = false;
+
          this._router.navigate(['/panel/cupones']);
-        },
-        error=>{
-          console.log(error);
-        }
-      );
-    }else{
-      iziToast.show({
-          title : 'ERROR',
-          titleColor : '#FF0000',
-          color: 'red',
-          class : 'text-danger',
-          position : 'topRight',
-          message : 'Los datos del formulario no son validos' 
-       });
+      },
+      error=>{
+        console.log(error);
+        this.load_btn = false;
+      }
+    );
+  }else{
+    iziToast.show({
+        title : 'ERROR',
+        titleColor : '#FF0000',
+        color: 'red',
+        class : 'text-danger',
+        position : 'topRight',
+        message : 'Los datos del formulario no son validos' 
+      });
     }
   }
 

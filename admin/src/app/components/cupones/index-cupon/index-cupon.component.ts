@@ -8,7 +8,7 @@ import { CuponService } from 'src/app/services/cupon.service';
 })
 export class IndexCuponComponent implements OnInit{
 
-  public cupones : Array<any>=[];
+  public cupones : Array<any> = [];
   public load_data = false;
   public page = 1;
   public pageSize = 10;
@@ -29,6 +29,15 @@ export class IndexCuponComponent implements OnInit{
       }
     )
     
+  }
+
+  filtrar(){
+    this._cuponService.listar_cupones_admin(this.filtro, this.token).subscribe(
+      response=>{
+        this.cupones = response.data;
+        this.load_data = false;
+      }
+    ) 
   }
 
 }

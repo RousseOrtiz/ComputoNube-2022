@@ -18,7 +18,7 @@
             <div class="col-6">
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Buscar por codigo" name="filtro" [(ngModel)]="filtro">
-                    <button class="btn btn-dark" type="button">Filtrar</button>
+                    <button class="btn btn-dark" (click)="filtrar()" type="button">Filtrar</button>
                   </div>
             </div>
         </div>
@@ -51,17 +51,15 @@
                         <td>{{item.codigo}}</td>
                         <td>{{item.tipo}}</td>
                         <td>{{item.valor}}</td>
-                        <td>{{item.limite}} restantess </td>
+                        <td>{{item.limite}} restantes</td>
                         <td>
                           <div class="btn-group dropdown">
-                            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Dropdown
+                            <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Opciones
                             </button>
                             <div class="dropdown-menu">
-                              <a href="#" class="dropdown-item">Action</a>
-                              <a href="#" class="dropdown-item">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a href="#" class="dropdown-item">Something else here</a>
+                              <a  class="dropdown-item">Eliminar</a>
+                              <a  class="dropdown-item">Editar</a>
                             </div>
                           </div>
                         </td>

@@ -21,6 +21,7 @@ const registro_cupon_admin = async function(req,res){
 const listar_cupones_admin = async function(req,res){
     if(req.user){
         if(req.user.role == 'admin'){
+            
             var filtro = req.params['filtro'];
 
             let reg = await Cupon.find({codigo: new RegExp(filtro, 'i')});
