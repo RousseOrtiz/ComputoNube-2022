@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { ProductoService } from 'src/app/services/producto.service';
+import { v4 as uuidv4 } from 'uuid';
 
 declare var iziToast:any;
 declare var $:any;
@@ -105,7 +106,27 @@ export class GaleriaProductoComponent implements OnInit{
   }
 
   subir_imagen(){
-
+    if(this.file != undefined){
+      let data = {
+        imagen: this.file,
+        _id: uuidv4()
+      }
+      console.log(data);
+      this._productoService.agregar_imagen_galeria_admin(this.id,data,this.token).subscribe(
+        response=>{
+          console.log(response);
+        }
+      );
+    }else{
+      iziToast.show({
+          title : 'ERROR',
+          titleColor : '#FF0000',
+          color: 'red',
+          class : 'text-danger',
+          position : 'topRight',
+          message : 'Seleccione una imagen' 
+      });
+    }
   }
 
 }
