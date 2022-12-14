@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { ProductoService } from 'src/app/services/producto.service';
 
+declare var iziToast:any;
+declare var $:any;
+
 @Component({
   selector: 'app-galeria-producto',
   templateUrl: './galeria-producto.component.html',
@@ -14,7 +17,7 @@ export class GaleriaProductoComponent implements OnInit{
   public id: any;
   public token: any;
 
-  public nueva_variedad = '';
+  public file: File | undefined;
   public load_btn = false ;
   public url: any;
 
@@ -51,8 +54,58 @@ export class GaleriaProductoComponent implements OnInit{
     
   }
 
+
+  fileChangeEvent(event:any):void{
+    var file:any;
+    if(event.target.files && event.target.files[0]){
+      file = <File>event.target.files[0];
+    }else{
+      iziToast.show({
+          title : 'ERROR',
+          titleColor : '#FF0000',
+          color: 'red',
+          class : 'text-danger',
+          position : 'topRight',
+          message : 'Sin imagen de envio' 
+      });
+        //volver a cargar la imagen por defecto
+      this.file = undefined;
+    }
+    //validacion para imagen correcta
+    if(file.size <= 4000000 ){
+      if(file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg'){
+
+        this.file = file;
+
+      }else{
+        iziToast.show({
+          title : 'ERROR',
+          titleColor : '#FF0000',
+          color: 'red',
+          class : 'text-danger',
+          position : 'topRight',
+          message : 'El archivo debe ser una imagen' 
+      });
+      $('#input-img').val('');
+      this.file = undefined;
+      }
+    }else{
+      iziToast.show({
+        title : 'ERROR',
+        titleColor : '#FF0000',
+        color: 'red',
+        class : 'text-danger',
+        position : 'topRight',
+        message : 'La imagen no puede superar los 4MB' 
+      });
+      $('#input-img').val('');
+      this.file = undefined;
+    }
+    console.log(this.file);
+  }
+
   subir_imagen(){
-    
+
   }
 
 }

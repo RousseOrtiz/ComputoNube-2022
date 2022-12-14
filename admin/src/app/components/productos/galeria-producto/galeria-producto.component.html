@@ -39,12 +39,17 @@
               <label class="col-md-3 col-form-label font-weight-medium" for="text-input">Nueva imagen</label>
               <div class="col-md-9">
                 <div class="input-group">
-                  <input class="form-control" type="file">
-                  <button class="btn btn-dark" type="button" (click)="subir_imagen()">Subir</button>
-                  <button *ngIf="load_btn" type="button" class="btn btn-primary">
-                    <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
-                    Subiendo...
-                  </button>
+                  <input id="input-img" class="form-control" (change)="fileChangeEvent($event)" type="file">
+                  <ng-container *ngIf="file != undefined">
+                    <button class="btn btn-dark" type="button" (click)="subir_imagen()">Subir</button>
+                    <button *ngIf="load_btn" type="button" class="btn btn-primary">
+                        <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                        Subiendo...
+                    </button>
+                  </ng-container>
+                  <ng-container *ngIf="file == undefined">
+                    <button class="btn btn-dark" type="button" disabled>Subir</button>
+                  </ng-container>
                 </div>
               </div>
               <div class="col-md-3">
