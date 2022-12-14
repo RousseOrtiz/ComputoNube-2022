@@ -32,6 +32,7 @@ export class ConfigComponent implements OnInit {
       this._adminService.obtener_config_admin(this.token).subscribe(
         response=>{
           this.config = response.data;
+          this.imgSelect = this.url+'obtener_logo/'+this.config.logo;
           console.log(this.config);
         },
         error=>{
@@ -82,7 +83,14 @@ export class ConfigComponent implements OnInit {
 
       this._adminService.actualiza_config_admin("63979850d37f4b1af99ae09f",data,this.token).subscribe(
         response=>{
-          console.log(response);
+          iziToast.show({
+              title : 'SUCCESS',
+              titleColor : '#1DC74C',
+              color: 'green',
+              class : 'text-success',
+              position : 'topRight',
+              message : 'Configuracion actualizada exitosamente' 
+      });
         }
       );
 
@@ -159,6 +167,9 @@ export class ConfigComponent implements OnInit {
     $('.cs-file-drop-preview').html("<img src="+this.imgSelect+">");
   }
 
+  eliminar_categoria(idx: any){
+    this.config.categorias.splice(idx,1);
+  }
 
 
 }

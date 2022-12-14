@@ -65,7 +65,7 @@ export class AdminService {
     fd.append('titulo',data.titulo);
     fd.append('serie',data.serie);
     fd.append('correlativo',data.correlativo);
-    fd.append('categorias',data.categorias);
+    fd.append('categorias',JSON.stringify(data.categorias));
     fd.append('logo',data.logo);
     return this._http.put(this.url+'actualiza_config_admin/'+id,fd,{headers:headers});
   }else{

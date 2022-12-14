@@ -1,5 +1,6 @@
 var Config = require('../models/config'); 
 var fs = require('fs');
+var path = require('path');
 
 const obtener_config_admin = async function(req,res){
     if(req.user){
@@ -30,7 +31,7 @@ const actualiza_config_admin = async function(req,res){
                 var logo_name = name[2];
 
                 let reg = await Config.findByIdAndUpdate({_id:"63979850d37f4b1af99ae09f"},{
-                    categorias: data.categorias,
+                    categorias: JSON.parse(data.categorias),
                     titulo : data.titulo,
                     serie: data.serie,
                     logo: logo_name,
