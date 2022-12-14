@@ -1,4 +1,5 @@
 var Config = require('../models/config'); 
+var fs = require('fs');
 
 const obtener_config_admin = async function(req,res){
     if(req.user){
@@ -15,13 +16,14 @@ const obtener_config_admin = async function(req,res){
     }
 }
 
-const actualizar_config_admin = async function(req,res){
+const actualiza_config_admin = async function(req,res){
     if(req.user){
         if(req.user.role == 'admin'){
 
             let data  = req.body;
 
             if(req.files){
+                console.log('si hay img');
                 //si hay imagen
                 var img_path = req.files.logo.path;
                 var name = img_path.split('\\');
@@ -44,6 +46,7 @@ const actualizar_config_admin = async function(req,res){
                 })
                 res.status(200).send({data:reg});
             }else{
+                console.log('no hay img');
                 let reg = await Config.findByIdAndUpdate({_id:"63979850d37f4b1af99ae09f"},{
                     categorias: data.categorias,
                     titulo : data.titulo,
@@ -61,7 +64,23 @@ const actualizar_config_admin = async function(req,res){
     }
 }
 
+const obtener_logo = async  function(req,res){
+    var img = req.params['img'];
+
+    console.log(img);
+    fs.stat('./uploads/configuraciones/'+img, function(error){
+        if(!error){
+            let path_img= './uploads/configuraciones/'+img;
+            res.status(200).sendFile(path.resolve(path_img));
+        }else{
+            let path_img= './uploads/default.jpg';
+            res.status(200).sendFile(path.resolve(path_img));
+        }
+    })
+}
+
 module.exports = {
-    actualizar_config_admin,
-    obtener_config_admin
+    actualiza_config_admin,
+    obtener_config_admin,
+    obtener_logo
 }
