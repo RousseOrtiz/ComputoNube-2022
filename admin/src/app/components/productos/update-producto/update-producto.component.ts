@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { subscribeOn } from 'rxjs';
+import { AdminService } from 'src/app/services/admin.service';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -23,11 +24,14 @@ export class UpdateProductoComponent implements OnInit{
   public token: any;
   public file: File | undefined;
   public url: any;
+  public config_global : any = {};
 
   constructor(
     private _route : ActivatedRoute,
     private _productoService : ProductoService,
+    private _adminService: AdminService,
     private _router : Router,
+    
 
   ){
     this.config = {
@@ -35,6 +39,12 @@ export class UpdateProductoComponent implements OnInit{
     }
     this.token = localStorage.getItem('token');
     this.url = GLOBAL.url;
+    this._adminService.obtener_config_publico().subscribe(
+      response=>{
+        this.config_global = response.data;
+        console.log(this.config_global);
+      }
+    );
   }
 
   ngOnInit(): void {
