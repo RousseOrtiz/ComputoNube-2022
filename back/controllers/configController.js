@@ -1,5 +1,20 @@
 var Config = require('../models/config'); 
 
+const obtener_config_admin = async function(req,res){
+    if(req.user){
+        if(req.user.role == 'admin'){
+
+            let reg = await Config.findById({_id: "63979850d37f4b1af99ae09f"});
+            res.status(200).send({data:reg});
+           
+        }else{
+            res.status(500).send({message: 'NoAccess'});
+        }      
+    }else{
+        res.status(500).send({message: 'NoAccess'});
+    }
+}
+
 const actualizar_config_admin = async function(req,res){
     if(req.user){
         if(req.user.role == 'admin'){
@@ -47,5 +62,6 @@ const actualizar_config_admin = async function(req,res){
 }
 
 module.exports = {
-    actualizar_config_admin
+    actualizar_config_admin,
+    obtener_config_admin
 }
